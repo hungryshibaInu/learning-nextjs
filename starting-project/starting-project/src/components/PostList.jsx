@@ -5,21 +5,12 @@ import { useLoaderData } from 'react-router-dom';
 function PostList() {
   const posts = useLoaderData();
 
-  function addPostHandler(postData) {
-    fetch('http://localhost:8080/posts', {
-      method: 'POST',
-      body: JSON.stringify(postData),
-      headers: { 'Content-Type': 'application/json' },
-    });
-    setPosts((prevPosts) => [postData, ...prevPosts]);
-  }
-
   return (
     <>
       {posts.length > 0 && (
         <ul className={classes.posts}>
-          {posts.map((post, index) => {
-            return <Post key={index} author={post.author} body={post.body} />;
+          {posts.map((post) => {
+            return <Post key={post.id} id={post.id} author={post.author} body={post.body} />;
           })}
         </ul>
       )}
